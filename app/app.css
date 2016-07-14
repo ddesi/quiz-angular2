@@ -1,0 +1,44 @@
+header {
+	width: 100%;
+	background-color: transparent;
+}
+
+nav {
+	margin: 0 auto;
+	width: 100%;
+	padding: 10px 0;
+}
+
+nav ul {
+	list-style: none;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	display: inline;
+	padding: 10px 0;
+	margin-right: -4px;
+	width: 120px;
+	text-align: center;
+	font-family: "Roboto";
+	font-size: 22px;
+}
+
+nav a {
+	padding: 10px 20px;
+	margin: 0;
+	width: 120px;
+	text-decoration: none;
+	color: #000;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+
+nav a:hover {
+	background-color: #306692;
+	opacity: .8;
+	color: #fff;
+}

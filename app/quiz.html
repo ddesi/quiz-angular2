@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div *ngFor="let visibleHint of visibleHints">
+        <div *ngIf="visibleHint">{{ visibleHint }}</div>
+    </div>
+    <img *ngIf="image" src="{{ image }}" width="200"/>
+    <br>
+    <div *ngIf="charDescription" (click)="nextPerson()">{{ charDescription }}</div>
+    <input type="text" [(ngModel)]="guessedName" />
+    <button (click)="checkName()">guess the name</button> <button (click)="nextHint()">give me a hint</button>
+    <br><br>
+</div>
+
+<div id="footer">
+    <button class="button start" (click)="reloadPage()">Restart</button>
+</div>

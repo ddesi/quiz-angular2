@@ -1,0 +1,20 @@
+[
+	{
+		"name": "grissom",
+		"image": "http://vignette3.wikia.nocookie.net/csi/images/0/0d/William_Petersen.jpg/revision/latest?cb=20150318053255",
+		"description": "lorem ipsum",
+		"hints": ["This person is super smart", "This person loves bugs", "THE EVIDENCE DOESNT LIE"]
+	},
+	{
+		"name": "alexx",
+		"image": "http://www.aaanything.net/wp-content/uploads/2011/09/khandi-alexander-as-dr-alexx-woods-on-set.jpg",
+		"description": "lorem ipsum2",
+		"hints": ["This person is a medical examiner", "This person lives in Miami", "This person wont fall for your BS"]
+	},
+	{
+		"name": "langston",
+		"image": "http://1.bp.blogspot.com/_yPWyFZEdY0s/S2r4f2jdJ-I/AAAAAAAAN6M/zjuWkJlXnmE/s400/langston-csi.jpg",
+		"description": "lorem ipsum3",
+		"hints": ["This person was a pathologist", "This person is a noob-ish csi and also a professor", "This person is actually Morpheus"]
+	}
+]

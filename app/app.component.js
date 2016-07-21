@@ -15,6 +15,7 @@ var http_1 = require("@angular/http");
 var person_service_1 = require('./person.service');
 var home_component_1 = require('./home.component');
 var quiz_component_1 = require('./quiz.component');
+// import {PersonComponent} from "./person.component";
 var AppComponent = (function () {
     function AppComponent(animationService, elementRef) {
         this.elementRef = elementRef;

@@ -1,16 +1,46 @@
-<div class="container">
+<div id="container">
 
-    <div *ngFor="let visibleHint of visibleHints">
-        <div *ngIf="visibleHint">{{ visibleHint }}</div>
+    <div id="char_div">
+        <div id="img_div">
+            <img src="{{ quiz.image }}" width="200">
+        </div>
+
+        <div *ngIf="quiz.nameIsCorrect==true" id="descr_div">
+            <h2>you are correct!</h2>
+            <h2>some info about this character:</h2>
+            <p>{{ quiz.charDescription }}</p>
+        </div>
+        <div *ngIf="quiz.nameIsincorrect==true">
+            <h2>nope you are wrong!! check the hints or move on to the next person</h2>
+        </div>
+        <div *ngIf="!hasMorePeople()">
+            <h2p>no more hints nor people</h2p>
+            <button class="btn" (click)="nextPerson()">restart the game</button>
+        </div>
     </div>
-    <img *ngIf="image" src="{{ image }}" width="200"/>
-    <br>
-    <div *ngIf="charDescription" (click)="nextPerson()">{{ charDescription }}</div>
-    <input type="text" [(ngModel)]="guessedName" />
-    <button (click)="checkName()">guess the name</button> <button (click)="nextHint()">give me a hint</button>
-    <br><br>
-</div>
 
-<div id="footer">
-    <button class="button start" (click)="reloadPage()">Restart</button>
+    <div id="hints_div">
+        <div *ngFor="let visibleHint of quiz.visibleHints">
+            <p>{{ visibleHint }}</p>
+        </div>
+
+        <div *ngIf="!hasMoreHints()">
+            <h2>no more hints about this character! guess or move on to the next person</h2>
+            <button class="btn" (click)="nextPerson()">show next person</button>
+        </div>
+        <button [disabled]="!hasMoreHints() || quiz.nameIsCorrect==true" class="btn" (click)="nextHint()">give me a hint</button>
+
+
+    </div>
+
+    <div id="score_div">
+        <h2>your score: {{ quiz.score }}</h2>
+    </div>
+
+    <div id="guess_div">
+        <p>so who is it?</p>
+        <input type="text" [disabled]="quiz.nameIsCorrect==true" (keydown.enter)="checkName()" [(ngModel)]="quiz.guessedName"><button [disabled]="quiz.nameIsCorrect==true" class="btn" (click)="checkName()">guess</button>
+        <button class="btn" (click)="nextPerson()">show next person</button>
+    </div>
+
 </div>

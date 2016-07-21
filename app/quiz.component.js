@@ -10,58 +10,90 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var person_service_1 = require("./person.service");
+var quiz_1 = require("./quiz");
 var QuizComponent = (function () {
     function QuizComponent(personService) {
         this.personService = personService;
-        this.visibleHints = [];
-        this.charDescription = [];
-        this.counter = 0;
     }
     QuizComponent.prototype.getHints = function () {
         var _this = this;
         this.personService.retrievePeople().subscribe(function (people) { return _this.people = people[0].concat(people[1]); });
     };
+    QuizComponent.prototype.initialize = function () {
+        var _this = this;
+        this.quiz = new quiz_1.Quiz();
+        this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
+        setTimeout(function () {
+            _this.nextHint();
+        }, 800);
+    };
     QuizComponent.prototype.ngOnInit = function () {
+        this.initialize();
         this.getHints();
     };
-    QuizComponent.prototype.reloadPage = function () {
-        window.location.reload();
-    };
     QuizComponent.prototype.checkName = function () {
-        var person = this.people[this.counter];
-        if (this.guessedName == person.name) {
-            this.charDescription.push(this.people[this.counter].description);
-            this.visibleHints = [];
-            this.nextHint();
+        var person = this.people[this.quiz.counter];
+        var image = this.people[this.quiz.counter].image;
+        var charDescription = this.people[this.quiz.counter].description;
+        if (this.quiz.guessedName == person.name) {
+            this.quiz.guessedName = null;
+            this.quiz.score = this.quiz.score + 1;
+            this.quiz.nameIsCorrect = true;
+            this.quiz.nameIsincorrect = false;
+            this.quiz.charDescription = charDescription;
+            this.quiz.image = image;
         }
         else {
-            alert('nope try again');
+            this.quiz.guessedName = null;
+            this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
+            this.quiz.nameIsincorrect = true;
+            this.quiz.nameIsCorrect = false;
         }
     };
     QuizComponent.prototype.nextPerson = function () {
-        if (this.counter !== this.people.length - 1) {
-            this.counter = this.counter + 1;
-            this.visibleHints = [];
+        if (this.hasMorePeople()) {
+            this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
+            this.quiz.nameIsCorrect = false;
+            this.quiz.nameIsincorrect = false;
+            this.quiz.counter = this.quiz.counter + 1;
+            this.quiz.visibleHints = [];
             this.nextHint();
         }
         else {
-            alert('you are done! no more hints nor people');
+            this.initialize();
+        }
+    };
+    QuizComponent.prototype.hasMorePeople = function () {
+        if (this.people == undefined) {
+            return false;
+        }
+        else if (this.quiz.counter !== this.people.length - 1) {
+            return true;
+        }
+        else {
+            return false;
         }
     };
     QuizComponent.prototype.nextHint = function () {
-        var hintCounter = this.visibleHints.length;
-        var nextHint = this.people[this.counter].hints[hintCounter];
-        if (hintCounter == this.people[this.counter].hints.length) {
-            var image = this.people[this.counter].image;
-            this.image = image;
-            this.visibleHints.length = hintCounter + 1;
-        }
-        else if (hintCounter == this.people[this.counter].hints.length + 1) {
-            this.nextPerson();
-            this.image = null;
+        var hintCounter = this.quiz.visibleHints.length;
+        var nextHint = this.people[this.quiz.counter].hints[hintCounter];
+        if (this.hasMoreHints() == true) {
+            this.quiz.visibleHints.push(nextHint);
         }
         else {
-            this.visibleHints.push(nextHint);
+            this.nextPerson();
+        }
+    };
+    QuizComponent.prototype.hasMoreHints = function () {
+        var hintCounter = this.quiz.visibleHints.length;
+        if (this.people == undefined) {
+            return false;
+        }
+        else if (hintCounter !== this.people[this.quiz.counter].hints.length + 1) {
+            return true;
+        }
+        else {
+            return false;
         }
     };
     QuizComponent = __decorate([

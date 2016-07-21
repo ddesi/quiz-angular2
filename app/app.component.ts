@@ -6,6 +6,7 @@ import {HTTP_PROVIDERS} from "@angular/http";
 import { PersonService } from './person.service';
 import { HomeComponent } from './home.component';
 import { QuizComponent } from './quiz.component';
+// import {PersonComponent} from "./person.component";
 
 
 @Component({

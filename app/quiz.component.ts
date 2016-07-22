@@ -20,15 +20,18 @@ export class QuizComponent implements OnInit {
         private personService: PersonService){}
 
     getHints() {
-		this.personService.retrievePeople().subscribe(people =>this.people = people[0].concat(people[1]));
+		this.personService.retrievePeople().subscribe(
+			function(people) {
+				this.people = people[0].concat(people[1]);
+				this.nextHint();
+			}.bind(this)
+		);
 	}
 	
 	initialize() {
 		this.quiz = new Quiz();
 		this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
-		setTimeout(() => {
-			this.nextHint();
-		}, 800);
+
 	}
 
     ngOnInit(){
@@ -42,7 +45,7 @@ export class QuizComponent implements OnInit {
 		let image = this.people[this.quiz.counter].image;
 		let charDescription = this.people[this.quiz.counter].description;
 
-		if (this.quiz.guessedName == person.name){
+		if (this.quiz.guessedName.toLowerCase() == person.name){
 
 			this.quiz.guessedName = null;
 			this.quiz.score = this.quiz.score+1;
@@ -64,7 +67,8 @@ export class QuizComponent implements OnInit {
 	public nextPerson() {
 
 		if (this.hasMorePeople()) {
-			
+
+			this.quiz.guessedName = null;
 			this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
 			this.quiz.nameIsCorrect = false;
 			this.quiz.nameIsincorrect = false;
@@ -75,6 +79,7 @@ export class QuizComponent implements OnInit {
 		} else {
 
 			this.initialize();
+			this.nextHint();
 		}
 	}
 	

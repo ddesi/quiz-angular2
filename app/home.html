@@ -1,7 +1,10 @@
 <div class="container">
-    <h1>Welcome to the quiz!</h1>
-    <a class="button" [routerLink]="['/quiz']" routerLinkActive="active">start here</a>
-    <router-outlet></router-outlet>
+    <div id="welcome">
+        <h1>Guess the GoT or CSI character!</h1>
+        <br><br>
+        <a class="button" [routerLink]="['/quiz']" routerLinkActive="active">start here</a>
+        <router-outlet></router-outlet>
+    </div>
 </div>
 
 

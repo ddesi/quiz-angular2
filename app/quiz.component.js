@@ -16,16 +16,14 @@ var QuizComponent = (function () {
         this.personService = personService;
     }
     QuizComponent.prototype.getHints = function () {
-        var _this = this;
-        this.personService.retrievePeople().subscribe(function (people) { return _this.people = people[0].concat(people[1]); });
+        this.personService.retrievePeople().subscribe(function (people) {
+            this.people = people[0].concat(people[1]);
+            this.nextHint();
+        }.bind(this));
     };
     QuizComponent.prototype.initialize = function () {
-        var _this = this;
         this.quiz = new quiz_1.Quiz();
         this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
-        setTimeout(function () {
-            _this.nextHint();
-        }, 800);
     };
     QuizComponent.prototype.ngOnInit = function () {
         this.initialize();
@@ -35,7 +33,7 @@ var QuizComponent = (function () {
         var person = this.people[this.quiz.counter];
         var image = this.people[this.quiz.counter].image;
         var charDescription = this.people[this.quiz.counter].description;
-        if (this.quiz.guessedName == person.name) {
+        if (this.quiz.guessedName.toLowerCase() == person.name) {
             this.quiz.guessedName = null;
             this.quiz.score = this.quiz.score + 1;
             this.quiz.nameIsCorrect = true;
@@ -52,6 +50,7 @@ var QuizComponent = (function () {
     };
     QuizComponent.prototype.nextPerson = function () {
         if (this.hasMorePeople()) {
+            this.quiz.guessedName = null;
             this.quiz.image = 'http://www.thepoliticalinsider.com/wp-content/uploads/2016/02/guesswho.jpg';
             this.quiz.nameIsCorrect = false;
             this.quiz.nameIsincorrect = false;
@@ -61,6 +60,7 @@ var QuizComponent = (function () {
         }
         else {
             this.initialize();
+            this.nextHint();
         }
     };
     QuizComponent.prototype.hasMorePeople = function () {

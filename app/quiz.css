@@ -1,0 +1,84 @@
+#char_div {
+    float: left;
+    width: 33.33%;
+    height: 60%;
+    padding: 1em;
+    background-color: #f6f6f6;
+    text-align: center;
+}
+
+#hints_div {
+    float: left;
+    width: 33.33%;
+    height: 60%;
+    padding: 1em;
+    background-color: #f6f6f6;
+    text-align: center;
+}
+
+#hint_button {
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+}
+
+#score_div {
+    float: left;
+    width: 22.3%;
+    height: 60%;
+    padding: 1em;
+    background-color: #f6f6f6;
+    text-align: center;
+}
+
+#score_div h1 {
+    color: #1da1f2;
+}
+
+#guess_div {
+    clear: both;
+    padding: 1em;
+    background-color: #f6f6f6;
+    text-align: center;
+}
+
+input {
+    position: relative;
+  	display: inline-block;
+  	width: 20em;
+  	padding: 1em;
+  	line-height: 2;
+  	border: 2px solid #000;
+  	outline: none;
+  	border-radius: 0;
+  	box-shadow: none;
+  	background-color: #fff;
+  	color: #000;
+  	font-weight: bold;
+  	transition: border 0.3s;
+}
+
+.btn {
+    background-color: #fff;
+    color: #000;
+    line-height: 2;
+    padding: 1em;
+    border: 2px solid #000;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.btn:hover,
+.btn:active {
+    color: #fff;
+    background: #1da1f2;
+}
+
+.btn:disabled, .btn:disabled:hover {
+    background-color: #fff;
+    color: #c0c0c0;
+    border: 2px solid #c0c0c0;
+}
